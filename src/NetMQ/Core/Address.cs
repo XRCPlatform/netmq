@@ -58,6 +58,11 @@ namespace NetMQ.Core
         /// </summary>
         public const string EpgmProtocol = "epgm";
 
+         ///   The string-literal "socks"
+         ///   - this denotes TCP communication through SOCKS5 over the network.
+         /// </summary>
+         public const string Socks5Protocol = "socks5";
+
         /// <summary>
         /// Interface IZAddress specifies that Resolve and property Address must be implemented.
         /// </summary>
@@ -116,6 +121,7 @@ namespace NetMQ.Core
                     case TcpProtocol: return Resolved.ToString();
                     case IpcProtocol: return Resolved.ToString();
                     case PgmProtocol: return Resolved.ToString();
+                    case Socks5Protocol: return Resolved.ToString();
                 }
             }
 

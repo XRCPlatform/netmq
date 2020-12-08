@@ -30,6 +30,7 @@ using JetBrains.Annotations;
 using NetMQ.Core.Patterns;
 using NetMQ.Core.Transports.Ipc;
 using NetMQ.Core.Transports.Pgm;
+using NetMQ.Core.Transports.Socks5;
 using NetMQ.Core.Transports.Tcp;
 using NetMQ.Core.Utils;
 using TcpListener = NetMQ.Core.Transports.Tcp.TcpListener;
@@ -237,6 +238,7 @@ namespace NetMQ.Core
                 case Address.InProcProtocol:
                 case Address.IpcProtocol:
                 case Address.TcpProtocol:
+                case Address.Socks5Protocol:
                     // All is well
                     break;
                 case Address.PgmProtocol:
@@ -672,6 +674,12 @@ namespace NetMQ.Core
                 case Address.IpcProtocol:
                     {
                         paddr.Resolved = (new IpcAddress());
+                        paddr.Resolved.Resolve(address, true);
+                        break;
+                    }
+                case Address.Socks5Protocol:
+                    {
+                        paddr.Resolved = (new Socks5Address());
                         paddr.Resolved.Resolve(address, true);
                         break;
                     }

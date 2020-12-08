@@ -30,6 +30,7 @@ using NetMQ.Core.Transports;
 using NetMQ.Core.Transports.Ipc;
 using NetMQ.Core.Transports.Pgm;
 using NetMQ.Core.Transports.Tcp;
+using NetMQ.Core.Transports.Socks5;
 
 namespace NetMQ.Core
 {
@@ -598,6 +599,11 @@ namespace NetMQ.Core
                 case Address.IpcProtocol:
                 {
                     LaunchChild(new IpcConnector(ioThread, this, m_options, m_addr, wait));
+                    return;
+                }
+                case Address.Socks5Protocol:
+                {
+                    LaunchChild(new Socks5Connector(ioThread, this, m_options, m_addr, wait));
                     return;
                 }
                 case Address.PgmProtocol:

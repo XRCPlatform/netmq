@@ -37,54 +37,54 @@ namespace NetMQ.Core.Transports.Tcp
         /// </summary>
         private const int ReconnectTimerId = 1;
 
-        private readonly IOObject m_ioObject;
+        protected readonly IOObject m_ioObject;
 
         /// <summary>
         /// Address to connect to. Owned by session_base_t.
         /// </summary>
-        private readonly Address m_addr;
+        protected readonly Address m_addr;
 
         /// <summary>
         /// The underlying AsyncSocket.
         /// </summary>
         [CanBeNull]
-        private AsyncSocket m_s;
+        protected AsyncSocket m_s;
 
         /// <summary>
         /// If true file descriptor is registered with the poller and 'handle'
         /// contains valid value.
         /// </summary>
-        private bool m_handleValid;
+        protected bool m_handleValid;
 
         /// <summary>
         /// If true, connector is waiting a while before trying to connect.
         /// </summary>
-        private readonly bool m_delayedStart;
+        protected readonly bool m_delayedStart;
 
         /// <summary>
         /// True if a timer has been started.
         /// </summary>
-        private bool m_timerStarted;
+        protected bool m_timerStarted;
 
         /// <summary>
         /// Reference to the session we belong to.
         /// </summary>
-        private readonly SessionBase m_session;
+        protected readonly SessionBase m_session;
 
         /// <summary>
         /// Current reconnect-interval. This gets updated for back-off strategy.
         /// </summary>
-        private int m_currentReconnectIvl;
+        protected int m_currentReconnectIvl;
 
         /// <summary>
         /// String representation of endpoint to connect to
         /// </summary>
-        private readonly string m_endpoint;
+        protected readonly string m_endpoint;
 
         /// <summary>
         /// Socket
         /// </summary>
-        private readonly SocketBase m_socket;
+        protected readonly SocketBase m_socket;
 
         /// <summary>
         /// Create a new TcpConnector object.
@@ -288,7 +288,7 @@ namespace NetMQ.Core.Transports.Tcp
         /// <summary>
         /// Internal function to add a reconnect timer
         /// </summary>
-        private void AddReconnectTimer()
+        protected void AddReconnectTimer()
         {
             int rcIvl = GetNewReconnectIvl();
             m_ioObject.AddTimer(rcIvl, ReconnectTimerId);
@@ -324,7 +324,7 @@ namespace NetMQ.Core.Transports.Tcp
         /// <summary>
         /// Close the connecting socket.
         /// </summary>
-        private void Close()
+        protected void Close()
         {
             Debug.Assert(m_s != null);
             try
