@@ -42,13 +42,14 @@ namespace NetMQ.Core.Transports.Socks5
             StartConnecting();
         }
 
-        private void StartConnecting()
+        protected override void StartConnecting()
         {
             Debug.Assert(m_s == null);
 
             // Create the socket.
             try
             {
+                Console.WriteLine("starting connecting");
                 m_s = AsyncSocket.Create(m_addr.Resolved.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             }
             catch (SocketException)

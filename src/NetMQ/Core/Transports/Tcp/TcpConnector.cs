@@ -174,10 +174,9 @@ namespace NetMQ.Core.Transports.Tcp
         /// <summary>
         /// Internal function to start the actual connection establishment.
         /// </summary>
-        private void StartConnecting()
+        protected virtual void StartConnecting()
         {
             Debug.Assert(m_s == null);
-
             // Create the socket.
             try
             {
