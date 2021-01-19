@@ -4,7 +4,7 @@ namespace NetMQ.Core.Transports.Socks5
     {
         public const byte Reserved = 0x00;
 
-        public const byte AuthNumberOfAuthMethodsSupported = 0x02;
+        public const byte AuthNumberOfAuthMethodsSupported = 0x01;
         public const byte AuthMethodNoAuthenticationRequired = 0x00;
         public const byte AuthMethodGssapi = 0x01;
         public const byte AuthMethodUsernamePassword = 0x02;
