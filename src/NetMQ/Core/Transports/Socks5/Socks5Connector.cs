@@ -49,7 +49,6 @@ namespace NetMQ.Core.Transports.Socks5
             // Create the socket.
             try
             {
-                Console.WriteLine("starting connecting");
                 m_s = AsyncSocket.Create(m_addr.Resolved.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             }
             catch (SocketException)
