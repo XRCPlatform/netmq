@@ -4,7 +4,7 @@ namespace NetMQ.Core.Transports.Socks5
     {
         public const byte Reserved = 0x00;
 
-        public const byte AuthNumberOfAuthMethodsSupported = 2;
+        public const byte AuthNumberOfAuthMethodsSupported = 0x01;
         public const byte AuthMethodNoAuthenticationRequired = 0x00;
         public const byte AuthMethodGssapi = 0x01;
         public const byte AuthMethodUsernamePassword = 0x02;
@@ -31,5 +31,7 @@ namespace NetMQ.Core.Transports.Socks5
         public const byte AddrtypeIpv4 = 0x01;
         public const byte AddrtypeDomainName = 0x03;
         public const byte AddrtypeIpv6 = 0x04;
+
+        public const byte SocksVersion = 0x05;
     }
 }
