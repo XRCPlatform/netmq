@@ -121,7 +121,7 @@ namespace NetMQ.Core.Transports.Socks5
         private void MakeSocks5Connection()
         {
             // Auth
-            var authBuffer = new byte[3] { 5, 1, Socks5Constants.AuthMethodNoAuthenticationRequired };
+            var authBuffer = new byte[3] { Socks5Constants.SocksVersion, Socks5Constants.AuthNumberOfAuthMethodsSupported, Socks5Constants.AuthMethodNoAuthenticationRequired };
             m_s.Send(authBuffer);
             clientEvent.WaitOne();
 
@@ -164,7 +164,7 @@ namespace NetMQ.Core.Transports.Socks5
             }
 
             var destPortBytes = new byte[2] { Convert.ToByte(destPort / 256), Convert.ToByte(destPort % 256) };
-            buffer[0] = 5;
+            buffer[0] = Socks5Constants.SocksVersion;
             buffer[1] = Socks5Constants.CmdConnect;
             buffer[2] = Socks5Constants.Reserved;
             buffer[3] = addrType;
