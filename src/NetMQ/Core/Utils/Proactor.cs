@@ -29,6 +29,7 @@ namespace NetMQ.Core.Utils
 
         public Proactor([NotNull] string name)
         {
+            ForceDotNet.Force();
             m_name = name;
             m_stopping = false;
             m_stopped = false;
