@@ -1,5 +1,3 @@
-#if !NETCOREAPP1_0
-
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Xunit;
@@ -105,11 +103,12 @@ namespace NetMQ.Tests
             Assert.Equal(before.Message, after.Message);
         }
 
-        private static T Clone<T>(T source)
+        private static T Clone<T>(T source) where T : class
         {
             return Deserialise<T>(Serialise(source));
         }
 
+#pragma warning disable SYSLIB0011 // BinaryFormatter is obsolete
         private static Stream Serialise(object source)
         {
             var formatter = new BinaryFormatter();
@@ -124,9 +123,8 @@ namespace NetMQ.Tests
             stream.Position = 0;
             return (T)formatter.Deserialize(stream);
         }
+#pragma warning restore SYSLIB0011 // BinaryFormatter is obsolete
 
         #endregion
     }
 }
-
-#endif
