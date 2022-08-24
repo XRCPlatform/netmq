@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
-using JetBrains.Annotations;
 using NetMQ.Sockets;
 
 namespace NetMQ.SimpleTests
@@ -12,7 +11,7 @@ namespace NetMQ.SimpleTests
 
         protected const int MsgCount = 1000000;
 
-        public string TestName { get; protected set; }
+        public string? TestName { get; protected set; }
 
         public void RunTest()
         {
@@ -44,9 +43,9 @@ namespace NetMQ.SimpleTests
                     Consume(socket, messageSize);
 
                     long ticks = watch.ElapsedTicks;
-                    double seconds = (double)ticks/Stopwatch.Frequency;
-                    double msgsPerSec = MsgCount/seconds;
-                    double megabitsPerSec = msgsPerSec*messageSize*8/1000000;
+                    double seconds = (double)ticks / Stopwatch.Frequency;
+                    double msgsPerSec = MsgCount / seconds;
+                    double megabitsPerSec = msgsPerSec * messageSize * 8 / 1000000;
 
                     Console.Out.WriteLine(" {0,-6} {1,10:0.0} {2,8:0.00}", messageSize, msgsPerSec, megabitsPerSec);
                 }
@@ -64,11 +63,11 @@ namespace NetMQ.SimpleTests
             }
         }
 
-        [NotNull] protected abstract PushSocket CreateProducerSocket();
-        [NotNull] protected abstract PullSocket CreateConsumerSocket();
+        protected abstract PushSocket CreateProducerSocket();
+        protected abstract PullSocket CreateConsumerSocket();
 
-        protected abstract void Produce([NotNull] PushSocket socket, int messageSize);
-        protected abstract void Consume([NotNull] PullSocket socket, int messageSize);
+        protected abstract void Produce(PushSocket socket, int messageSize);
+        protected abstract void Consume(PullSocket socket, int messageSize);
     }
 
     internal class ThroughputBenchmark : ThroughputBenchmarkBase
@@ -91,7 +90,7 @@ namespace NetMQ.SimpleTests
         protected override void Produce(PushSocket socket, int messageSize)
         {
             var msg = new byte[messageSize];
-            msg[messageSize/2] = 0x42;
+            msg[messageSize / 2] = 0x42;
 
             for (int i = 0; i < MsgCount; i++)
                 socket.SendFrame(msg);
@@ -103,7 +102,7 @@ namespace NetMQ.SimpleTests
             {
                 var message = socket.ReceiveFrameBytes();
                 Debug.Assert(message.Length == messageSize, "Message length was different from expected size.");
-                Debug.Assert(message[messageSize/2] == 0x42, "Message did not contain verification data.");
+                Debug.Assert(message[messageSize / 2] == 0x42, "Message did not contain verification data.");
             }
         }
     }
@@ -149,7 +148,8 @@ namespace NetMQ.SimpleTests
             {
                 socket.Receive(ref msg);
                 Debug.Assert(msg.Data.Length == messageSize, "Message length was different from expected size.");
-                Debug.Assert(msg.Data[msg.Size/2] == 0x42, "Message did not contain verification data.");
+                Debug.Assert(msg.Data[msg.Size / 2] == 0x42, "Message did not contain verification data.");
+
             }
         }
     }

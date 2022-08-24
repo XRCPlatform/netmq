@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0 || NET47
+﻿#if NETSTANDARD2_0 || NETSTANDARD2_1 || NET47
 
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
 namespace NetMQ
 {
